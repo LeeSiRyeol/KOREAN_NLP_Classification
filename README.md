@@ -5,6 +5,8 @@
 -[Python>=3.8]
 
 ##Installation
-Install the Python package to run.
+Please go ahead and install the Python package to run.
 
+'''sh
 $pip3 install -r requirements.txt
+'''
