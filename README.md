@@ -1,12 +1,14 @@
 # NLP_Classification
 
-##Enviroments
+## Enviroments
 -[Ubuntu 20.04]
 -[Python>=3.8]
 
-##Installation
+## Installation
 Please go ahead and install the Python package to run.
 
-'''sh
+```sh
 $pip3 install -r requirements.txt
-'''
+```
+
+## Data Preparation
