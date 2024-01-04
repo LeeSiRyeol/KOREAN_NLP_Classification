@@ -2,6 +2,7 @@
 
 ## Enviroments
 -[Ubuntu 20.04]
+
 -[Python>=3.8]
 
 ## Installation
@@ -38,24 +39,30 @@ If you use NLP data in a different format, modifications to the "dataload.py" mo
 * KoBigBird can handle more than 512 tokens, with a maximum of 4096 tokens.
 
 ## Model Train
-Each NLP model can be trained using the train.py script.
+Each NLP model can be trained using the `train.py` script.
+```sh
+$python3 train.py
+```
 
 ### Adjustable Parameters
-`batch size`: Default is 4.
+`batch size`: Default is 1.
 
 `lr`: Maximum learning rate, default is 2e-5.
 
-`weight_decay`: A parameter related to overfitting. 0 indicates potential overfitting, and increasing this value leads to greater generalization. Default is 0.02.
+`weight_decay`: A parameter related to overfitting. 0 indicates potential overfitting, and increasing this value leads to greater generalization. The default is 0.02.
 
-`pct_start`: Refers to the position of peak learning rate when using the OneCycleLR learning scheduler. It is 0 at the start and 1 at the end. Default is 0.3.
+`pct_start`: Refers to the position of peak learning rate when using the OneCycleLR learning scheduler. It is 0 at the start and one at the end. The default is 0.3.
 
-`epoch`: The number of times the entire dataset is used for training. Default is 10.
+`epoch`: The number of times the entire dataset is used for training. The default is 10.
 
-`seq_len`: The length of input tokens. Typical NLP models have a maximum of 512 tokens.(KoBigBird can handle up to 4096 tokens) Default is 512.
+`seq_len`: The length of input tokens. Typical NLP models have a maximum of 512 tokens. (KoBigBird can handle up to 4096 tokens) The default is 512.
 
 `NLP_model`: Default is KLUE-RoBERTa
 
 `random_seed`
+```sh
+$python3 train.py --batch_size 1 --lr 2e-5 --weight_decay 0.02 --pct_start 0.3 --epoch 10 --NLP_model KLUE-RoBERTa --seq_len 512 --random_seed 102 --data_path ./data
+```
 
 ### Considerations and Modifications
 * You need to define the Data path. If necessary, add functions to split the data into train, validation, and test sets.
@@ -64,7 +71,7 @@ Each NLP model can be trained using the train.py script.
   val_txt, val_class = Data_Load(data_path+'/val.csv')
   test_txt, test_class = Data_Load(data_path+'/test.csv')
   ```
-* Modify the num_worker parameter of DataLoader to suit your work environment. Default is 4.
+* Modify the num_worker parameter of DataLoader to suit your work environment. The default is 4.
   ```sh
   train_batch = data.DataLoader(dataset=train_data,
                                   batch_size=batch_size,
@@ -72,16 +79,16 @@ Each NLP model can be trained using the train.py script.
                                   num_workers=4,
                                   collate_fn=train_data.pad)
   ```
-* If you want to handle the results, you can use 'train_result()'. The available results include F1-score, report(classification_report), loss_list, model_file(trained model), predicted_label(predicted result for each sample), and logits_list (prediction scores for each sample).
+* If you want to handle the results, you can use `train_result()`. The available results include `f1-score`, `report`(classification_report), `loss_list`, `model_file`(trained model), `predicted_label`(predicted result for each sample), and `logits_list`(prediction scores for each sample).
   ```sh
   f1_list, report, loss_list, model_file, predicted_labels, true_labels, logits_list = train.train_result()
   F1_LIST, REPORT, PREDICTED_LABELS, TRUE_LABELS, LOGIT_LIST = train.test_result() 
   ```
   (Each prediction result covers both validation and test data.)
   
-* If you have predefined names for labels, modify the label_list. When creating a 'report', it uses the names from the 'label list'. Note that you should define them in order starting from class 0.
+* If you have predefined label names, modify the `label_list`. When creating a `report`, it uses the names from the `label list`. Note that you should define them in order, starting from class 0.
   ```sh
-  label_list = ['False','True']
+  label_list = ['False', 'True']
   ```
   ||precision|recall|f1-score|support|
   |---|---|---|---|---|
@@ -91,4 +98,10 @@ Each NLP model can be trained using the train.py script.
   |macro avg|-|-|-|-|
   |weighted avg|-|-|-|-|
 
+## Model Evaluation
+You can perform an evaluation using the `eval.py` script.
 
+Evaluation is similar to training. The important point is to modify the parameters and details defined during training, such as the `batch_size`, the `seq_len`, the `label_list`, etc.
+```sh
+$python3 eval.py --batch_size 1 --NLP_model KLUE-RoBERTa --seq_len 512 --data_path ./data
+```
