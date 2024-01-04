@@ -32,10 +32,21 @@ If you use NLP data in a different format, modifications to the "dataload.py" mo
 |KLUE-BERT|https://github.com/KLUE-benchmark/KLUE.git|Use and Support on Hugging Face|
 |KLUE-RoBERTa|https://github.com/KLUE-benchmark/KLUE.git|Use and Support on Hugging Face|
 |KoBERT|https://github.com/SKTBrain/KoBERT.git|-|
-|KorBERT|https://aiopen.etri.re.kr/bertModel|KorBERT can be downloaded and used with the permission of ETRI.|
+|KorBERT|https://aiopen.etri.re.kr/bertModel|KorBERT can be downloaded and used with the permission of ETRI|
 |KoBigBird|https://github.com/monologg/KoBigBird.git|Use and Support on Hugging Face|
 
-* `KoBigBird` can use over the 512 tokens; maxinum input tokens is 4096.
+* KoBigBird can handle more than 512 tokens, with a maximum of 4096 tokens.
 
 ## Model Train
+Each NLP model can be trained using the train.py script.
 
+### Adjustable Parameters
+`batch size`: Default is 4.
+
+`lr`: learning rate, default is 2e-5.
+
+`weight_decay`: A parameter related to overfitting. 0 indicates potential overfitting, and increasing this value leads to greater generalization. Default is 0.02.
+
+`pct_start`: 
+
+`epoch`, `seq_len`, `NLP_model`, `random_seed`
