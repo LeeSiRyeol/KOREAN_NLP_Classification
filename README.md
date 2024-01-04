@@ -27,14 +27,15 @@ If you use NLP data in a different format, modifications to the "dataload.py" mo
 `class`: The class represents the label for each sample(text). Each class item must be expressed as a number. For example, in a binary classification problem, 'False' and 'True' should be represented as 0 and 1, respectively.
 
 ## Korea NLP models
-|Model|url|
-|----------|-----------|
-|KLUE-BERT|https://github.com/KLUE-benchmark/KLUE.git|
-|KLUE-RoBERTa|https://github.com/KLUE-benchmark/KLUE.git|
-|KoBERT|https://github.com/SKTBrain/KoBERT.git|
-|KorBERT|https://aiopen.etri.re.kr/bertModel|
-|KoBigBird|https://github.com/monologg/KoBigBird.git|
+|Model|url||
+|----------|-----------|-----------|
+|KLUE-BERT|https://github.com/KLUE-benchmark/KLUE.git|Use and Support on Hugging Face|
+|KLUE-RoBERTa|https://github.com/KLUE-benchmark/KLUE.git|Use and Support on Hugging Face|
+|KoBERT|https://github.com/SKTBrain/KoBERT.git|-|
+|KorBERT|https://aiopen.etri.re.kr/bertModel|KorBERT can be downloaded and used with the permission of ETRI.|
+|KoBigBird|https://github.com/monologg/KoBigBird.git|Use and Support on Hugging Face|
 
-*KorBERT can be downloaded and used with the permission of ETRI.
+* `KoBigBird` can use over the 512 tokens; maxinum input tokens is 4096.
 
+## Model Train
 
