@@ -43,10 +43,52 @@ Each NLP model can be trained using the train.py script.
 ### Adjustable Parameters
 `batch size`: Default is 4.
 
-`lr`: learning rate, default is 2e-5.
+`lr`: Maximum learning rate, default is 2e-5.
 
 `weight_decay`: A parameter related to overfitting. 0 indicates potential overfitting, and increasing this value leads to greater generalization. Default is 0.02.
 
-`pct_start`: 
+`pct_start`: Refers to the position of peak learning rate when using the OneCycleLR learning scheduler. It is 0 at the start and 1 at the end. Default is 0.3.
 
-`epoch`, `seq_len`, `NLP_model`, `random_seed`
+`epoch`: The number of times the entire dataset is used for training. Default is 10.
+
+`seq_len`: The length of input tokens. Typical NLP models have a maximum of 512 tokens.(KoBigBird can handle up to 4096 tokens) Default is 512.
+
+`NLP_model`: Default is KLUE-RoBERTa
+
+`random_seed`
+
+### Considerations and Modifications
+* You need to define the Data path. If necessary, add functions to split the data into train, validation, and test sets.
+  ```sh
+  train_txt, train_class = Data_Load(data_path+'/train.csv')
+  val_txt, val_class = Data_Load(data_path+'/val.csv')
+  test_txt, test_class = Data_Load(data_path+'/test.csv')
+  ```
+* Modify the num_worker parameter of DataLoader to suit your work environment. Default is 4.
+  ```sh
+  train_batch = data.DataLoader(dataset=train_data,
+                                  batch_size=batch_size,
+                                  shuffle=True,
+                                  num_workers=4,
+                                  collate_fn=train_data.pad)
+  ```
+* If you want to handle the results, you can use 'train_result()'. The available results include F1-score, report(classification_report), loss_list, model_file(trained model), predicted_label(predicted result for each sample), and logits_list (prediction scores for each sample).
+  ```sh
+  f1_list, report, loss_list, model_file, predicted_labels, true_labels, logits_list = train.train_result()
+  F1_LIST, REPORT, PREDICTED_LABELS, TRUE_LABELS, LOGIT_LIST = train.test_result() 
+  ```
+  (Each prediction result covers both validation and test data.)
+  
+* If you have predefined names for labels, modify the label_list. When creating a 'report', it uses the names from the 'label list'. Note that you should define them in order starting from class 0.
+  ```sh
+  label_list = ['False','True']
+  ```
+  ||precision|recall|f1-score|support|
+  |---|---|---|---|---|
+  |False|-|-|-|-|
+  |True|-|-|-|-|
+  |accuracy|||-|-|
+  |macro avg|-|-|-|-|
+  |weighted avg|-|-|-|-|
+
+
