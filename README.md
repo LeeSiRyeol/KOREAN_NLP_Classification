@@ -60,7 +60,7 @@ $python3 train.py
 
 `seq_len`: The length of input tokens. Typical NLP models have a maximum of 512 tokens. (KoBigBird can handle up to 4096 tokens) The default is 512.
 
-`NLP_model`: Default is KLUE-RoBERTa
+`NLP_model`: Default is KLUE-RoBERTa.
 
 `random_seed`
 ```sh
