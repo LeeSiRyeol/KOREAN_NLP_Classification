@@ -21,7 +21,9 @@ If you use NLP data in a different format, modifications to the "dataload.py" mo
 ### example_data.csv
 |text|class|
 |--------|--------|
-|text content|number of class|
+|sample 1. text content|sample 1 label|
+|...|...|
+|sample n. text content|sample n label|
 
 `text`: The content, which is comprised of text, corresponds to the input.
 
