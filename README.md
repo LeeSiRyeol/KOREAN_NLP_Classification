@@ -39,6 +39,7 @@ If you use NLP data in a different format, modifications to the "dataload.py" mo
 |KoBigBird|https://github.com/monologg/KoBigBird.git|Use and Support on Hugging Face|
 
 * KoBigBird can handle more than 512 tokens, with a maximum of 4096 tokens.
+* If you are using KorBERT, after downloading the model through ETRI, you must save KorBERT in the 'module' folder. We used 'kor_tensorflow', one of the models supported by ETRI. I will upload the related empty file.
 
 ## Model Train
 Each NLP model can be trained using the `train.py` script.
