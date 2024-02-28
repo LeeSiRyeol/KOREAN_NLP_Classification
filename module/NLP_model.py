@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-#Classifie head using Dense layer
+#Classifier head using Dense layer
 class Dense_head(nn.Module):
     """
     Input: encoder_output (It is using the [CLS] position output, the [CLS] position is 0th token)
